@@ -1,1 +1,156 @@
-To Be Added
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNKFHM14T4"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DNKFHM14T4');
+      </script>
+    
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>PMFault | Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="PMFault" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire" />
+<meta property="og:description" content="Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire" />
+<link rel="canonical" href="http://localhost:8888/PMFault/" />
+<meta property="og:url" content="http://localhost:8888/PMFault/" />
+<meta property="og:site_name" content="PMFault" />
+<script type="application/ld+json">
+{"headline":"PMFault","description":"Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire","url":"http://localhost:8888/PMFault/","@type":"WebSite","name":"PMFault","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<style type="text/css">
+/*#logo {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10%;
+}*/
+</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/PMFault/assets/css/style.css?v=49149012549112d7dae62ce668e04658e2960baf">
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <div style="text-align:center" ><img src="./logo_whitetext.png" width="250" height="250" id="logo"/></div>
+
+      <!-- <h1 class="project-name">PMFault</h1> -->
+      <h2 class="project-tagline">Faulting and Bricking Server CPUs through Management Interfaces<br> Or: A Modern Example of Halt and Catch Fire</h2>
+        <!-- <a href="https://github.com/zt-chen/PMFault" class="btn">Read Paper</a> -->
+        <a href="https://github.com/zt-chen/PMFault" class="btn">Paper Will Come Out Soon</a>
+        <a href="./#cite" class="btn">Cite Paper</a>
+
+        <!-- <a href="#videos" class="btn">Watch Videos</a> -->
+      
+        <a href="https://github.com/zt-chen/PMFault" class="btn">View on GitHub</a>
+      
+        
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <p>The PMFault paper will come out soon.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Previous work such as <a href="https://plundervolt.com">Plundervolt</a> has shown that <em>software-based</em> undervolting can induce faults into Intel SGX enclaves and break their security guarantees. However, Intel has addressed this issue with microcode updates.</p>
+
+<p>Later, we discovered <a href="https://zt-chen.github.io/voltpillager/">VoltPillager</a> - a <em>hardware-based</em> undervolting method that can achieve the same (and more) as Plundervolt, bypassing all currently available countermeasures for SGX. However, this attack requires physical access to the server - opening the box and adding additional hardware.</p>
+
+<p>Both of these previous attacks use the SVID interface to change the CPU voltage. With PMFault, we revived the voltage control of certain server CPUs through the PMBus - another voltage control interface based on the I2C protocol and usually implemented by a server Voltage Regulator Module (VRM).</p>
+
+<p>Due to flaws in the design of Supermicro 11th generation motherboards, we can gain access to the PMBus through multiple paths: 1) via an I2C connection from the OS running on CPU, or 2) vulnerabilities found in another microcontroller called the Baseboard Management Controller (BMC), which often exists on server motherboards. With the revived undervolting attack, we demonstrate that fault injection into SGX enclaves can be carried out remotely via software again . Moreover, we discovered an overvolting attack that can <strong>permanently brick</strong> the server CPU.</p>
+
+<p>Our results may require a rethink of the security analysis process of server platforms: The security is not only down to ensuring the security of the software running on it, but the overall design of the hardware and embedded systems on the motherboard should also go through a thorough security review. Securing such a system needs the collaborative effort of both software developers and hardware engineers.</p>
+
+<!-- The academic paper will be presented at [CHES 2023](https://ches.iacr.org/2023/).  -->
+
+<h2 id="faq">FAQ</h2>
+
+<h3 id="what-is-intel-sgx">What is Intel SGX?</h3>
+
+<p>Intel Software Guard Extensions (SGX) is a set of security-related instructions that are built into modern Intel CPUs. SGX allows to shield sensitive computations inside so-called “enclaves”. The contents of these enclaves are protected and cannot be accessed or modified from outside the enclave. Intel SGX is also often assumed to protect the trusted code from attackers who have physical control of the platform, such as an untrusted cloud provider.</p>
+
+<h3 id="does-an-attacker-need-physical-access-to-my-server-for-this">Does an attacker need physical access to my server for this?</h3>
+
+<p>No physical access is required for Supermicro 11th gen motherboards - this attack can be carried out remotely via SSH.</p>
+
+<h3 id="what-is-the-threat-model">What is the threat model?</h3>
+
+<p>For undervolting attacks against SGX, we assume that an attacker (including a malicious insider) has full software access to the system but no (or limited) physical access. More precisely, the attacker has <code class="language-plaintext highlighter-rouge">root</code> access to the OS and software access to the BMC via the KCS interface or Ethernet.</p>
+
+<p>For the overvolting attack, we similarly assume an attacker who has <code class="language-plaintext highlighter-rouge">root</code> privilege on the host CPU. The attacker could be a user of the bare metal instance provided by cloud providers. Clearly, the <code class="language-plaintext highlighter-rouge">root</code> user should have full control of the system but <em>should not</em> cause any physical damage to the system.</p>
+
+<p>More details on the threat model can also be found in our paper.</p>
+
+<h3 id="which-server-are-affected">Which server are affected?</h3>
+<p>In principle, any server that has the PMBus exposed through an I2C connection to the CPU or BMC can be affected by PMFault. We performed our case study on a 11th generation Supermicro motherboard (X11SSL-CF). We also detected that a VRM exists on the PMBus on X11SPG-TF and X11SSE-F Supermicro motherboards and hence believe that these motherboards are equally affected. To the best of our knoweledge, Supermicro 12th gen server motherbards already have mitigations implemented to prevent our attacks.</p>
+
+<h3 id="is-there-a-tool-for-checking-the-pmbus-connection">Is there a tool for checking the PMBus connection?</h3>
+
+<p>We provide the <code class="language-plaintext highlighter-rouge">PMBusDetect</code> tool for scanning the I2C bus for a VRM. However, due to a lack of access to server hardware, it currently only supports detecting certain VRM types. We hence decide to <a href="site.repository_url">open-source this tool</a> and hope that the community can contribute for a better view of the PMBus landscape.</p>
+
+<h3 id="do-the-patches-for-cve-2019-11157-plundervolt-protect-against-pmfault">Do the patches for CVE-2019-11157 (Plundervolt) protect against PMFault?</h3>
+
+<p>No, these patches simply disable the software undervolting interface which is used for sending messages through the SVID interface. PMFault uses another interface, the PMBus.</p>
+
+<h3 id="im-not-using-sgx---do-i-need-to-be-worried">I’m not using SGX - do I need to be worried?</h3>
+
+<p>Yes, it could be possible to use PMfault to overvolt the CPU and permanently brick it.</p>
+
+<h3 id="should-i-stop-using-and-throw-away-my-cpu-now">Should I stop using and throw away my CPU now?</h3>
+
+<p>No!</p>
+
+<h3 id="is-there-a-cve-and-how-did-supermicro-respond">Is there a CVE, and how did Supermicro respond?</h3>
+
+<p>We have responsibly disclosed our findings to Intel and Supermicro in April 2022. We discussed the details of our methods in several calls with Supermicro, and they acknowledge the existence of the issue and are looking into deploying fixes for their 11th generation products like the X11SSL-CF. Supermicro highlighted that the attacks do not replicate on their 12th generation, which e.g. include secure boot and update for the BMC and filtering on PMBus commands. Both of these features break the attack chains described in the paper. Intel considered the issue in the context of their own server motherboards and did not find them vulnerable. Intel did not comment on the impact on \ac{SGX}.</p>
+
+<p>CVE-2022-43309 has been reserved for PMFault.</p>
+
+<h3 id="where-can-i-find-the-code-and-more-information">Where can I find the code and more information?</h3>
+
+<p>All sources and PoC code can be found in our <a href="https://github.com/zt-chen/PMFault">Github repo</a>.</p>
+
+<h3 id="can-i-use-the-logo">Can I use the logo?</h3>
+<p>Yes. The logo is free to use, rights waived via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+
+<p><a href="/PMFault/logo.png">PNG</a></p>
+
+<p><a name="cite"></a></p>
+
+<h3 id="is-ther-a-citation-to-the-paper-yet">Is ther a citation to the paper yet?</h3>
+<p>We will update the citation as soon as the paper is published.</p>
+
+<!-- ```
+
+@article{Chen2023PMFault, 
+title={PMFault: Faulting and Bricking Server CPUs through Management Interfaces}, 
+volume={2023}, 
+year={2023}, 
+}
+
+``` -->
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>This research is partially funded by the Engineering and Physical Sciences Research Council (EPSRC) under grants EP/R012598/1, EP/R008000/1, and EP/V000454/1.  The results feed into DsbDtech. We would also like to thank Supermicro for providing a X12DPi-NT6 server for further investigation of the issue.</p>
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/zt-chen/PMFault-website">PMFault-website</a> is maintained by <a href="https://github.com/zt-chen">zt-chen</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
