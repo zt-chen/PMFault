@@ -1,0 +1,79 @@
+#ifndef __PMBUS_H__
+#define __PMBUS_H__
+
+#define DEVICE_ADDR 0x20
+
+#define CMD_VID_R 0x17		// Read only
+#define CMD_VID_W 0x15		// Read only
+#define CMD_MOD 0x1D
+
+#define MODE_FIX 0x4F
+#define MODE_OFS 0x00
+#define MODE_AUT 0x0F
+
+
+#define BIT0 0x0001
+#define BIT1 0x0002
+#define BIT2 0x0004
+#define BIT3 0x0008
+#define BIT4 0x0010
+#define BIT5 0x0020
+#define BIT6 0x0040
+#define BIT7 0x0080
+#define BIT8 0x0100
+#define BIT9 0x0200
+#define BIT10 0x0400
+#define BIT11 0x0800
+#define BIT12 0x1000
+#define BIT13 0x2000
+#define BIT14 0x4000
+#define BIT15 0x8000
+
+
+//// VOUT_MODE
+#define CMD_VOUT_MODE 0x20
+#define MASK_VOUT_MODE 0xE0
+#define MASK_VOUT_MODE_PARAM 0x1F
+
+enum VOUT_MODE{
+	VOUT_MODE_LINEAR = 0x00,
+	VOUT_MODE_VID = 0x20,
+	VOUT_MODE_DIRECT = 0x40
+};
+
+/// MFR_LOOP_PI_SET MP2965 Page 102
+#define CMD_MFR_LOOP_PI_SET 0xE2
+#define MASK_VOUT_PMBUS_LSB 0x0400
+
+enum VOUT_FORMAT{
+	VOUT_FORMAT_VID = 0x0000,
+	VOUT_FORMAT_1MV = 0x0400
+};
+
+//// VOUT_CMD
+#define CMD_VOUT_CMD 0x21
+
+//// MFT_VR_CONFIG MP2965 Page 103
+#define CMD_MFR_VR_CONFIG 0xE4
+#define MASK_VID_STEP_SEL 0x100
+#define MASK_OVER_CLOCK1_EN 0x400
+#define MASK_OVER_CLOCK2_EN 0x8
+
+enum VID_STEP{
+	VID_STEP_10MV = 0x0000,
+	VID_STEP_5MV = 0x0100
+};
+
+/// VOUT_OFFSET MP2965 Page 57
+#define CMD_VOUT_OFFSET 0x23
+
+#define CMD_READ_VOUT 0x8B
+#define CMD_PMBUS_REVISION 0x23
+
+#define CMD_OPERATION 0x01
+
+
+#define CMD_VOUT_MAX 0x24
+
+#define CMD_VOUT 0x8B
+#endif

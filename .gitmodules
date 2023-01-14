@@ -1,0 +1,6 @@
+[submodule "x11-FirmwareRepacking/super-bmc-fw-tools"]
+	path = x11-FirmwareRepacking/super-bmc-fw-tools
+	url = git@github.com:zt-chen/super-bmc-fw-tools.git
+[submodule "x11-FirmwareRepacking/ipmi_firmware_tools"]
+	path = x11-FirmwareRepacking/ipmi_firmware_tools
+	url = git@github.com:zt-chen/ipmi_firmware_tools.git

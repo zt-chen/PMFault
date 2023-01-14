@@ -1,0 +1,21 @@
+# BMC PMBus(I2C) voltage control
+
+## Overvolting
+brick.c does overvolting of the CPU. 
+It will disable the OCP and OVP of the VMR and try to set the voltage to 3.0V. 
+
+## Undervolting
+undervolt.c will slowly decrease the voltage to inject fault to SGX. 
+
+## Compiling and running
+Both code need to be compiled with gnu gcc arm-linux-gnueabi toolchain.
+You can install the toolchain with 
+
+```bash
+sudo apt-get install gcc-arm-linux-gnueabi
+sudo apt install binutils-arm-linux-gnueabi
+```
+
+If the toolchain is not installed in the default path, change the `export PATH:=../arm-linux-gnueabi/bin` in the Makefile to the path of your toolchain.
+
+The *.base can be uploaded to the BMC with `base64 -d < *.base > *.bin` once the SSH of the BMC is enabled via reflashing. See `x11-FirmwareRepacking` for details.
