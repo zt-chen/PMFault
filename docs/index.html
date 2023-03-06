@@ -20,11 +20,9 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire" />
 <meta property="og:description" content="Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire" />
-<link rel="canonical" href="http://localhost:8888/PMFault/" />
-<meta property="og:url" content="http://localhost:8888/PMFault/" />
 <meta property="og:site_name" content="PMFault" />
 <script type="application/ld+json">
-{"headline":"PMFault","description":"Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire","url":"http://localhost:8888/PMFault/","@type":"WebSite","name":"PMFault","@context":"https://schema.org"}</script>
+{"headline":"PMFault","description":"Faulting and Bricking Server CPUs through Management Interfaces Or: A Modern Example of Halt and Catch Fire","url":"/PMFault/","@type":"WebSite","name":"PMFault","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <style type="text/css">
@@ -36,7 +34,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/PMFault/assets/css/style.css?v=0f51315a7f1b9cbb88cbe52d965798f54d95f707">
+    <link rel="stylesheet" href="/PMFault/assets/css/style.css?v=309766ecfdf09f93f100cc3762b8d074270b527a">
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
@@ -44,10 +42,9 @@
     <header class="page-header" role="banner">
       <div style="text-align:center" ><img src="./logo_whitetext.png" width="250" height="250" id="logo"/></div>
 
-      <!-- <h1 class="project-name">PMFault</h1> -->
+      <h1 class="project-name">PMFault</h1>
       <h2 class="project-tagline">Faulting and Bricking Server CPUs through Management Interfaces<br> Or: A Modern Example of Halt and Catch Fire</h2>
-        <!-- <a href="https://github.com/zt-chen/PMFault" class="btn">Read Paper</a> -->
-        <a href="https://github.com/zt-chen/PMFault" class="btn">Paper Will Come Out Soon</a>
+        <a href="https://tches.iacr.org/index.php/TCHES/article/view/10275" class="btn">Read Paper</a>
         <a href="./#cite" class="btn">Cite Paper</a>
 
         <!-- <a href="#videos" class="btn">Watch Videos</a> -->
@@ -58,9 +55,7 @@
     </header>
 
     <main id="content" class="main-content" role="main">
-      <p>The PMFault paper will come out soon, a preprint is available at <a href="https://arxiv.org/abs/2301.05538">here</a>.</p>
-
-<h2 id="introduction">Introduction</h2>
+      <h2 id="introduction">Introduction</h2>
 
 <p>Previous work such as <a href="https://plundervolt.com">Plundervolt</a> has shown that <em>software-based</em> undervolting can induce faults into Intel SGX enclaves and break their security guarantees. However, Intel has addressed this issue with microcode updates.</p>
 
@@ -220,15 +215,21 @@ console.log(getFirstBrowserLanguage());
 <h3 id="is-there-a-citation-to-the-paper-yet">Is there a citation to the paper yet?</h3>
 <p>We will update the citation as soon as the paper is published.</p>
 
-<!-- ```
-
-@article{Chen2023PMFault, 
-title={PMFault: Faulting and Bricking Server CPUs through Management Interfaces}, 
-volume={2023}, 
-year={2023}, 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+@article{Chen_Oswald_2023, 
+  title={PMFault: Faulting and Bricking Server CPUs through Management Interfaces: Or: A Modern Example of Halt and Catch Fire}, 
+  author={Chen, Zitai and Oswald, David},
+  year={2023},
+  month={Mar.}, 
+  journal={IACR Transactions on Cryptographic Hardware and Embedded Systems}, 
+  volume={2023}, 
+  number={2}, 
+  pages={1–23} 
+  url={https://tches.iacr.org/index.php/TCHES/article/view/10275}, 
+  DOI={10.46586/tches.v2023.i2.1-23}
 }
 
-``` -->
+</code></pre></div></div>
 
 <h2 id="acknowledgements">Acknowledgements</h2>
 <p>This research is partially funded by the Engineering and Physical Sciences Research Council (EPSRC) under grants EP/R012598/1, EP/R008000/1, and EP/V000454/1.  The results feed into DsbDtech. We would also like to thank Supermicro for providing a X12DPi-NT6 server for further investigation of the issue.</p>

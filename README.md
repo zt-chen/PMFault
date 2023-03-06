@@ -5,7 +5,7 @@ This repo contains the supplementary materials for the paper "PMFault: Faulting 
 
 Check [our website](https://zt-chen.github.io/PMFault/) for a brief introduction of the PMFault attack.
 
-A preprint of the paper is available at [here](./PMFault-V1.4-preprint.pdf).
+PMFaut paper is available on [CHES Website](https://tches.iacr.org/index.php/TCHES/article/view/10275).
 
 ## Folder Structure
 ### Attack to Supermicro X11 Motherboards
