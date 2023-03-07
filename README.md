@@ -1,11 +1,13 @@
 # PMFault: Faulting and Bricking Server CPUs through Management Interfaces
+DOI for this repo: [![DOI](https://zenodo.org/badge/585790412.svg)](https://zenodo.org/badge/latestdoi/585790412)
+
 **Disclaimer: The code in this repo can cause PERMANENT DAMAGE to your server. Use at your own risk.**
 
 This repo contains the supplementary materials for the paper "PMFault: Faulting and Bricking Server CPUs through Management Interfaces", which will appear in [CHES 2023](https://ches.iacr.org/2023/). 
 
 Check [our website](https://zt-chen.github.io/PMFault/) for a brief introduction of the PMFault attack.
 
-PMFaut paper is available on [CHES Website](https://tches.iacr.org/index.php/TCHES/article/view/10275).
+[PMFaut paper](https://tches.iacr.org/index.php/TCHES/article/view/10275) is available on CHES Website.
 
 ## Folder Structure
 ### Attack to Supermicro X11 Motherboards
@@ -31,3 +33,19 @@ If you are using the OS provided i2c bus (`/dev/i2c-X`) to communicate with PMBu
 1. Load the kernel module to enable i2c bus, different motherboard may need different kernel module, check which one to use at [here](https://docs.kernel.org/i2c/busses/index.html) `sudo modprobe i2c-i801` works for Supermicro X11. 
 2. `libi2c` library is required for building `PMBusDetect`, `asrock-pmbus-powerdown` and `x11-undervolt_from_rpi`, you can install it with `sudo apt-get install -y libi2c-dev` or compile from source: [i2c-tools](https://github.com/mozilla-b2g/i2c-tools)
 
+
+## Cite this work
+```
+@article{Chen_Oswald_2023, 
+  title={PMFault: Faulting and Bricking Server CPUs through Management Interfaces: Or: A Modern Example of Halt and Catch Fire}, 
+  author={Chen, Zitai and Oswald, David},
+  year={2023},
+  month={Mar.}, 
+  journal={IACR Transactions on Cryptographic Hardware and Embedded Systems}, 
+  volume={2023}, 
+  number={2}, 
+  pages={1–23} 
+  url={https://tches.iacr.org/index.php/TCHES/article/view/10275}, 
+  DOI={10.46586/tches.v2023.i2.1-23}
+}
+```
